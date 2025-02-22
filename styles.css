@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'TheJjester';
+    src: url('TheJjester-ODvd.ttf') format('truetype'),
+         url('TheJjester.woff2') format('woff2'),
+         url('TheJjester.woff') format('woff'); 
+}
+
+body {
+    font-family: 'TheJjester', sans-serif;
+}
+
