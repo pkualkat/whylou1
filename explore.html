@@ -32,7 +32,6 @@
     </style>
 </head>
 <body>
-    <div class="container">
         <h1>How would you like to explore Louisville</h1>
         <form id="residentSurvey">
             <div class="category">
@@ -72,8 +71,6 @@
             </div>
             <button type="button" onclick="submitSurvey()">Submit</button>
         </form>
-    </div>
-
     <script>
         function submitSurvey() {
             var form = document.getElementById('residentSurvey');
@@ -91,4 +88,14 @@
         }
     </script>
 </body>
+<style>
+    .category {
+        display: flex;
+        flex-wrap: wrap; /* Wrap items into multiple lines */
+    }
+    
+    .category label {
+        margin-right: 20px; /* Space between items */
+    }
+    </style>
 </html>
