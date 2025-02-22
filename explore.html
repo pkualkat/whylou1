@@ -67,38 +67,37 @@ button:hover {
     </style>
 </head>
 <body>
-    <div class="container">
         <h1>How would you like to explore Louisville</h1>
         <form id="residentSurvey">
-            <div class="Activities">
+            <div class="category">
                 <label>Activities:</label>
                 <input type="radio" name="activities" value="Outdoor Adventures"><label for="Outdoor Adventures"><img src="img/kayak.jpg" alt="Outdoor Adventures" width="150" height="250"></label>Outdoor Adventures<br>
                 <input type="radio" name="activities" value="Arts and Crafts"> Arts and Crafts<br>
                 <input type="radio" name="activities" value="Sports and Fitness"> Sports and Fitness<br>
                 <input type="radio" name="activities" value="Community Events"> Community Events<br>
             </div>
-            <div class="Interests">
+            <div class="category">
                 <label>Interests:</label>
                 <input type="radio" name="interests" value="Historic Sites"> Historic Sites<br>
                 <input type="radio" name="interests" value="Modern Architecture"> Modern Architecture<br>
                 <input type="radio" name="interests" value="Technology Hubs"> Technology Hubs<br>
                 <input type="radio" name="interests" value="Nature Reserves"> Nature Reserves<br>
             </div>
-            <div class="Entertainment">
+            <div class="category">
                 <label>Entertainment:</label>
                 <input type="radio" name="entertainment" value="Concerts and Shows"> Concerts and Shows<br>
                 <input type="radio" name="entertainment" value="Nightlife and Dining"> Nightlife and Dining<br>
                 <input type="radio" name="entertainment" value="Family-friendly Activities"> Family-friendly Activities<br>
                 <input type="radio" name="entertainment" value="Sports Events"> Sports Events<br>
             </div>
-            <div class="Culture">
+            <div class="category">
                 <label>Culture:</label>
                 <input type="radio" name="culture" value="Museums and Galleries"> Museums and Galleries<br>
                 <input type="radio" name="culture" value="Cultural Festivals"> Cultural Festivals<br>
                 <input type="radio" name="culture" value="Theater and Performing Arts"> Theater and Performing Arts<br>
                 <input type="radio" name="culture" value="Local Traditions"> Local Traditions<br>
             </div>
-            <div class="Opportunities">
+            <div class="category">
                 <label>Opportunities:</label>
                 <input type="radio" name="opportunities" value="Job Market"> Job Market<br>
                 <input type="radio" name="opportunities" value="Educational Programs"> Educational Programs<br>
@@ -107,8 +106,6 @@ button:hover {
             </div>
             <button type="button" onclick="submitSurvey()">Submit</button>
         </form>
-    </div>
-
     <script>
         function submitSurvey() {
             var form = document.getElementById('residentSurvey');
@@ -126,4 +123,14 @@ button:hover {
         }
     </script>
 </body>
+<style>
+    .category {
+        display: flex;
+        flex-wrap: wrap; /* Wrap items into multiple lines */
+    }
+    
+    .category label {
+        margin-right: 20px; /* Space between items */
+    }
+    </style>
 </html>
