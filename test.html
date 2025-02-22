@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Louisville</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>How would you like to explore Louisville</h1>
+    <form id="residentSurvey"> <label>Activities:</label>
+        <div class="category">
+            
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Outdoor Adventures">
+                <label for="Outdoor Adventures">Outdoor Adventures</label><br>
+                <img src="img/kayak.jpg" alt="Outdoor Adventures" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Arts and Crafts">
+                <label for="Arts and Crafts">Arts and Crafts</label><br>
+                <img src="img/art.jpg" alt="Arts and Crafts" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Sports and Fitness">
+                <label for="Sports and Fitness">Sports and Fitness</label><br>
+                <img src="img/sport.jpg" alt="Sports and Fitness" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Community Events">
+                <label for="Community Events">Community Events</label><br>
+                <img src="img/community.jpeg" alt="Community Events" width="150" height="250">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+.category {
+    display: grid;
+    grid-template-columns: repeat(5, 3fr);
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.activity-item {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activity-item img {
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+</style>

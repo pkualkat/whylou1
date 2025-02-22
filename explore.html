@@ -35,6 +35,7 @@ label {
     margin-bottom: 10px;
     font-weight: bold;
     color: #333;
+    text-align: center;
 }
 
 .radio-group {
@@ -64,19 +65,66 @@ button:hover {
     background-color: #555;
 }
 
+.category {
+    display: grid;
+    grid-template-columns: repeat(5, 3fr);
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.activity-item {
+    background-color: #ccc;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activity-item img {
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
     </style>
 </head>
 <body>
-        <h1>How would you like to explore Louisville</h1>
-        <form id="residentSurvey">
-            <div class="category">
-                <label>Activities:</label>
-                <input type="radio" name="activities" value="Outdoor Adventures"><label for="Outdoor Adventures"><img src="img/kayak.jpg" alt="Outdoor Adventures" width="150" height="250"></label>Outdoor Adventures<br>
-                <input type="radio" name="activities" value="Arts and Crafts"> Arts and Crafts<br>
-                <input type="radio" name="activities" value="Sports and Fitness"> Sports and Fitness<br>
-                <input type="radio" name="activities" value="Community Events"> Community Events<br>
+    <h1>How would you like to explore Louisville</h1>
+    <form id="residentSurvey"> <label>Activities:</label>
+        <div class="category">
+            
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Outdoor Adventures">
+                <label for="Outdoor Adventures">Outdoor Adventures</label><br>
+                <img src="img/kayak.jpg" alt="Outdoor Adventures" width="150" height="250">
             </div>
-            <div class="category">
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Arts and Crafts">
+                <label for="Arts and Crafts">Arts and Crafts</label><br>
+                <img src="img/art.jpg" alt="Arts and Crafts" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Sports and Fitness">
+                <label for="Sports and Fitness">Sports and Fitness</label><br>
+                <img src="img/sport.jpg" alt="Sports and Fitness" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="activities" value="Community Events">
+                <label for="Community Events">Community Events</label><br>
+                <img src="img/community.jpeg" alt="Community Events" width="150" height="250">
+            </div>
+        </div>
+    
+            <div class="category"> 
                 <label>Interests:</label>
                 <input type="radio" name="interests" value="Historic Sites"> Historic Sites<br>
                 <input type="radio" name="interests" value="Modern Architecture"> Modern Architecture<br>
@@ -105,7 +153,7 @@ button:hover {
                 <input type="radio" name="opportunities" value="Networking Events"> Networking Events<br>
             </div>
             <button type="button" onclick="submitSurvey()">Submit</button>
-        </form>
+    </form>
     <script>
         function submitSurvey() {
             var form = document.getElementById('residentSurvey');
@@ -123,14 +171,4 @@ button:hover {
         }
     </script>
 </body>
-<style>
-    .category {
-        display: flex;
-        flex-wrap: wrap; /* Wrap items into multiple lines */
-    }
-    
-    .category label {
-        margin-right: 20px; /* Space between items */
-    }
-    </style>
 </html>
