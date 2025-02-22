@@ -3,54 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore</title>
+    <title>Explore Lou</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            padding: 20px;
         }
         .container {
-            background-color: white;
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            font-size: 2.5em;
+            text-align: center;
+            color: #333;
+        }
+        .topic {
             margin-bottom: 20px;
         }
-        .categories {
-            display:            background-color: #007BFF;
-            color: white;
-            padding: 15px 30px;
-            margin: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: background-color 0.3s;
-        }
-        .category:hover {
-            background-color: #0056b3;
+        label {
+            margin-bottom: 10px;
+            display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Categories</h1>
-        <div class="categories">
-            <a href="activities.html" class="category">Activities</a>
-            <a href="interests.html" class="category">Interests</a>
-            <a href="entertainment.html" class="category">Entertainment</a>
-            <a href="culture.html" class="category">Culture</a>
-            <a href="opportunities.html" class="category">Opportunities</a>
-        </div>
+        <h1>How would you like to explore Louisville</h1>
+        <form id="residentSurvey">
+            <div class="topic">
+                <label>Activities:</label>
+                <input type="radio" name="activities" value="Outdoor Adventures"><label for="Outdoor Adventures"><img src="img/kayak.jpg" alt="Outdoor Adventures" width="150" height="250"></label>Outdoor Adventures<br>
+                <input type="radio" name="activities" value="Arts and Crafts"> Arts and Crafts<br>
+                <input type="radio" name="activities" value="Sports and Fitness"> Sports and Fitness<br>
+                <input type="radio" name="activities" value="Community Events"> Community Events<br>
+            </div>
+            <div class="topic">
+                <label>Interests:</label>
+                <input type="radio" name="interests" value="Historic Sites"> Historic Sites<br>
+                <input type="radio" name="interests" value="Modern Architecture"> Modern Architecture<br>
+                <input type="radio" name="interests" value="Technology Hubs"> Technology Hubs<br>
+                <input type="radio" name="interests" value="Nature Reserves"> Nature Reserves<br>
+            </div>
+            <div class="topic">
+                <label>Entertainment:</label>
+                <input type="radio" name="entertainment" value="Concerts and Shows"> Concerts and Shows<br>
+                <input type="radio" name="entertainment" value="Nightlife and Dining"> Nightlife and Dining<br>
+                <input type="radio" name="entertainment" value="Family-friendly Activities"> Family-friendly Activities<br>
+                <input type="radio" name="entertainment" value="Sports Events"> Sports Events<br>
+            </div>
+            <div class="topic">
+                <label>Culture:</label>
+                <input type="radio" name="culture" value="Museums and Galleries"> Museums and Galleries<br>
+                <input type="radio" name="culture" value="Cultural Festivals"> Cultural Festivals<br>
+                <input type="radio" name="culture" value="Theater and Performing Arts"> Theater and Performing Arts<br>
+                <input type="radio" name="culture" value="Local Traditions"> Local Traditions<br>
+            </div>
+            <div class="topic">
+                <label>Opportunities:</label>
+                <input type="radio" name="opportunities" value="Job Market"> Job Market<br>
+                <input type="radio" name="opportunities" value="Educational Programs"> Educational Programs<br>
+                <input type="radio" name="opportunities" value="Volunteer Work"> Volunteer Work<br>
+                <input type="radio" name="opportunities" value="Networking Events"> Networking Events<br>
+            </div>
+            <button type="button" onclick="submitSurvey()">Submit</button>
+        </form>
     </div>
+
+    <script>
+        function submitSurvey() {
+            var form = document.getElementById('residentSurvey');
+            var activities = form.elements['activities'].value;
+            var interests = form.elements['interests'].value;
+            var entertainment = form.elements['entertainment'].value;
+            var culture = form.elements['culture'].value;
+            var opportunities = form.elements['opportunities'].value;
+            
+            var googleMapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
+                activities + ' ' + interests + ' ' + entertainment + ' ' + culture + ' ' + opportunities + ' in Louisville, KY'
+            );
+
+            window.open(googleMapsURL, '_blank');
+        }
+    </script>
 </body>
 </html>
