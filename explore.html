@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Lou</title>
+    <title>Explore Lou Survey</title>
     <style>
+        .background {
+            background: url('img/background.jpeg') center center;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 110%;
+            z-index: -1;
+            background-color: black;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
             text-align: center;
+            position: relative;
+            min-height: 100vh; /* Full height of the viewport */
         }
 
         .container {
@@ -92,6 +105,7 @@
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <h1>How would you like to explore Louisville</h1>
     <form id="residentSurvey">
         <label>Activities</label>

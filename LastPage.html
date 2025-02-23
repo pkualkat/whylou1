@@ -11,9 +11,9 @@
             padding: 20px;
             background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh; /* Full height of the viewport */
+            min-height: 100vh; /* Full height of the viewport */
         }
 
         .background {
@@ -28,14 +28,32 @@
             background-color: black;
         }
 
+        .nav {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+
+        .nav a:hover {
+            background-color: #555;
+        }
+
         .container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 2fr);
+            grid-template-rows: repeat(2, 2fr);
             gap: 20px;
-            max-width: 800px;
+            max-width: 1200px;
             width: 100%;
-            height: 100%;
+            margin-top: 20px;
         }
 
         .box {
@@ -80,16 +98,35 @@
             border: 1px solid #ccc; /* Optional border for the container */
             border-radius: 8px; /* Rounded corners */
             overflow: hidden; /* Hide overflow */
-            
+            position: relative;
         }
-          
-        
 
         iframe {
             width: 100%; /* Full width of the container */
             height: 100%; /* Full height of the container */
             border: none; /* No border for the iframe */
-            ;
+        }
+
+        .zoom-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zoom-controls button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            margin: 2px 0;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .zoom-controls button:hover {
+            background-color: #555;
         }
 
         ul {
@@ -113,7 +150,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0nUGskBmROMHsYa2quWsVweXrBHTU_VM&callback=initMap" async defer></script>
 </head>
 <body>
-   <div class="background"></div>
+    <div class="background"></div>
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="LastPage.html">Results</a>
+    </div>
     <div class="container">
         <div class="box">
             <h1>Survey Results</h1>
@@ -123,7 +165,11 @@
             <div id="map"></div>
         </div>
         <div class="box iframe-container">
-            <iframe src="https://www.numbeo.com/cost-of-living/in/Louisville" title="Cost of Living in Louisville" aria-label="Cost of Living in Louisville" loading="lazy"></iframe>
+            <iframe id="costOfLivingIframe" src="https://www.numbeo.com/cost-of-living/in/Louisville" title="Cost of Living in Louisville" aria-label="Cost of Living in Louisville" loading="lazy"></iframe>
+            <div class="zoom-controls">
+                <button onclick="zoomIframe(1.1)">+</button>
+                <button onclick="zoomIframe(0.9)">-</button>
+            </div>
         </div>
         <div class="box widget-container">
             <h2>Jobs in Louisville</h2>
@@ -194,12 +240,7 @@
             }
         }
 
-        window.onload = function() {
-            displayResults();
-            fetchJobs();
-        };
-
-        const fetchJobs = async () => {
+        async function fetchJobs() {
             const response = await fetch('https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=93b8cdf3&app_key=e9fd7469ea308bc8284bb45074a8d1e2&results_per_page=5&where=Louisville');
             if (response.ok) {
                 const data = await response.json();
@@ -207,15 +248,26 @@
             } else {
                 console.error('Failed to fetch jobs:', response.status);
             }
-        };
+        }
 
-        const displayJobs = (jobs) => {
+        function displayJobs(jobs) {
             const jobList = document.getElementById('job-list');
             jobs.forEach(job => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `<a href="${job.redirect_url}" target="_blank">${job.title}</a> at ${job.company.display_name}`;
                 jobList.appendChild(listItem);
             });
+        }
+
+        function zoomIframe(scaleFactor) {
+            const iframe = document.getElementById('costOfLivingIframe');
+            const currentScale = parseFloat(iframe.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            iframe.style.transform = `scale(${currentScale * scaleFactor})`;
+        }
+
+        window.onload = function() {
+            displayResults();
+            fetchJobs();
         };
     </script>
 </body>
