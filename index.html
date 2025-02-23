@@ -23,6 +23,15 @@
             color: white;
             text-align: center;
             flex-direction: column;
+            .vignette {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+                pointer-events: none; /* Ensure the vignette doesn't interfere with interactions */
+            }
         }
         h1 {
             font-size: 3em;
@@ -47,6 +56,16 @@
     cursor: pointer;
     text-decoration: none;
     font-family: 'The Jjester'; /* Apply the custom font */
+    animation: fadeIn 3s ease-out;
+        }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
         .explore-button:hover {
             background-color: #444849;
         }
@@ -62,39 +81,12 @@
         }
         .btn-dark:hover {
             background-color: #23272b;
-        .explore-button {
-           px;
-            padding: 10px 20px;
-            font-size: 6.0em;
-            color: rgb(188, 185, 185);
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            
-        }
-        .explore-button:hover {
-            background-color: #444849;
-        }
-        .btn-dark {
-            margin-top: 20px;
-            padding: 100px 20px;
-            font-size: 1.2em;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn-dark:hover {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
         }
     </style>
 </head>
 <body>
     <div class="background">
+    <div class="vignette"></div>
         
         <a href="explore.html" class="explore-button">Explore</a>
     </div>
