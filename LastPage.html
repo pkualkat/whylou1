@@ -1,97 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Search and Cost of Living in Louisville</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end; /* Align to right */
-      height: 100vh; /* Full height of the viewport */
-      margin: 0;
-      background-color: #f4f4f4; /* Light gray background */
-      padding: 20px; /* Add some padding */
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end; /* Align to right */
-      transform: scale(0.9); /* Zoom out a little bit */
-    }
-    .widget-container {
-      width: 400px; /* Set width of the widget */
-      height: 300px; /* Set height of the widget */
-      border: 1px solid #ccc; /* Optional border */
-      border-radius: 8px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow */
-      background-color: white; /* Background color */
-      padding: 10px; /* Padding inside the box */
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Optional shadow for depth */
-      margin-bottom: 20px;
-    }
-    .iframe-container {
-      width: 400px; /* Set the width of the container */
-      height: 400px; /* Set the height of the container */
-      border: 1px solid #ccc; /* Optional border for the container */
-      border-radius: 8px; /* Rounded corners */
-      overflow: hidden; /* Hide overflow */
-      margin-top: 20px; /* Add some margin to the top */
-    }
-    iframe {
-      width: 100%; /* Full width of the container */
-      height: 100%; /* Full height of the container */
-      border: none; /* No border for the iframe */
-    }
-    h2 {
-      text-align: right;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    a {
-      text-decoration: none;
-      color: #007BFF; /* Link color */
-    }
-    a:hover {
-      text-decoration: underline; /* Underline on hover */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Results, Job Search, and Cost of Living in Louisville</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height of the viewport */
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        #suggestions {
+            margin-top: 20px;
+        }
+
+        .widget-container {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc; /* Optional border */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow */
+            background-color: white; /* Background color */
+            padding: 10px; /* Padding inside the box */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Optional shadow for depth */
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #ccc; /* Optional border for the container */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        iframe {
+            width: 100%; /* Full width of the container */
+            height: 100%; /* Full height of the container */
+            border: none; /* No border for the iframe */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF; /* Link color */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0nUGskBmROMHsYa2quWsVweXrBHTU_VM&callback=initMap" async defer></script>
 </head>
 <body>
-  <div class="container">
-    <div class="iframe-container">
-      <iframe src="https://www.numbeo.com/cost-of-living/in/Louisville" title="Cost of Living in Louisville" aria-label="Cost of Living in Louisville" loading="lazy"></iframe>
+    <div class="container">
+        <div class="box">
+            <h1>Survey Results</h1>
+            <div id="suggestions"></div>
+        </div>
+        <div class="box">
+            <div id="map"></div>
+        </div>
+        <div class="box iframe-container">
+            <iframe src="https://www.numbeo.com/cost-of-living/in/Louisville" title="Cost of Living in Louisville" aria-label="Cost of Living in Louisville" loading="lazy"></iframe>
+        </div>
+        <div class="box widget-container">
+            <h2>Jobs in Louisville</h2>
+            <ul id="job-list"></ul>
+        </div>
     </div>
-    <div class="widget-container">
-      <h2>Jobs in Louisville</h2>
-      <ul id="job-list"></ul>
-    </div>
-  </div>
-  <script>
-    const fetchJobs = async () => {
-      const response = await fetch('https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=93b8cdf3&app_key=e9fd7469ea308bc8284bb45074a8d1e2&results_per_page=20&where=Louisville');
-      if (response.ok) {
-        const data = await response.json();
-        displayJobs(data.results);
-      } else {
-        console.error('Failed to fetch jobs:', response.status);
-      }
-    };
-    const displayJobs = (jobs) => {
-      const jobList = document.getElementById('job-list');
-      jobs.forEach(job => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `<a href="${job.redirect_url}" target="_blank">${job.title}</a> at ${job.company.display_name}`;
-        jobList.appendChild(listItem);
-      });
-    };
-    fetchJobs();
-  </script>
+
+    <script>
+        function initMap() {
+            var louisville = { lat: 38.2527, lng: -85.7585 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: louisville
+            });
+        }
+
+        function displayResults() {
+            var data = JSON.parse(localStorage.getItem('surveyData'));
+            if (!data) {
+                document.getElementById('suggestions').innerHTML = '<p>No survey data found.</p>';
+                return;
+            }
+
+            var suggestionsDiv = document.getElementById('suggestions');
+            suggestionsDiv.innerHTML = '<h2>Suggestions based on your preferences:</h2>';
+            suggestionsDiv.innerHTML += '<p>Activities: ' + data.activities + '</p>';
+            suggestionsDiv.innerHTML += '<p>Interests: ' + data.interests + '</p>';
+            suggestionsDiv.innerHTML += '<p>Entertainment: ' + data.entertainment + '</p>';
+            suggestionsDiv.innerHTML += '<p>Culture: ' + data.culture + '</p>';
+            suggestionsDiv.innerHTML += '<p>Opportunities: ' + data.opportunities + '</p>';
+
+            var query = data.activities + ' ' + data.interests + ' ' + data.entertainment + ' ' + data.culture + ' ' + data.opportunities + ' in Louisville, KY';
+            var googleMapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+
+            // Display the map with the query
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: { lat: 38.2527, lng: -85.7585 }
+            });
+
+            var request = {
+                query: query,
+                fields: ['name', 'geometry'],
+            };
+
+            var service = new google.maps.places.PlacesService(map);
+            service.findPlaceFromQuery(request, function(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
+                    map.setCenter(results[0].geometry.location);
+                }
+            });
+
+            function createMarker(place) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                });
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: place.name
+                    });
+                    infowindow.open(map, marker);
+                });
+            }
+        }
+
+        window.onload = function() {
+            displayResults();
+            fetchJobs();
+        };
+
+        const fetchJobs = async () => {
+            const response = await fetch('https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=93b8cdf3&app_key=e9fd7469ea308bc8284bb45074a8d1e2&results_per_page=5&where=Louisville');
+            if (response.ok) {
+                const data = await response.json();
+                displayJobs(data.results);
+            } else {
+                console.error('Failed to fetch jobs:', response.status);
+            }
+        };
+
+        const displayJobs = (jobs) => {
+            const jobList = document.getElementById('job-list');
+            jobs.forEach(job => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<a href="${job.redirect_url}" target="_blank">${job.title}</a> at ${job.company.display_name}`;
+                jobList.appendChild(listItem);
+            });
+        };
+    </script>
 </body>
 </html>
