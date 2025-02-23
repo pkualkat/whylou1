@@ -3,14 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Louisville</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Explore Lou</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .topic {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 6px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .category {
+            display: grid;
+            grid-template-columns: repeat(5, 3fr);
+            grid-gap: 20px;
+            padding: 20px;
+        }
+
+        .activity-item {
+            background-color: #ccc;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .activity-item img {
+            margin-top: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        #suggestions {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0nUGskBmROMHsYa2quWsVweXrBHTU_VM" async defer></script>
 </head>
 <body>
     <h1>How would you like to explore Louisville</h1>
-    <form id="residentSurvey"> <label>Activities:</label>
+    <form id="residentSurvey">
+        <label>Activities</label>
         <div class="category">
-            
             <div class="activity-item">
                 <input type="radio" name="activities" value="Outdoor Adventures">
                 <label for="Outdoor Adventures">Outdoor Adventures</label><br>
@@ -32,44 +126,147 @@
                 <img src="img/community.jpeg" alt="Community Events" width="150" height="250">
             </div>
         </div>
+
+        <label>Interests</label>
+        <div class="category">
+            <div class="activity-item">
+                <input type="radio" name="interests" value="Historic Sites">
+                <label for="Historic Sites">Historic Sites</label><br>
+                <img src="" alt="Historic Sites" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="interests" value="Modern Architecture">
+                <label for="Modern Architecture">Modern Architecture</label><br>
+                <img src="" alt="Modern Architecture" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="interests" value="Technology Hubs">
+                <label for="Technology Hubs">Technology Hubs</label><br>
+                <img src="" alt="Technology Hubs" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="interests" value="Nature Reserves">
+                <label for="Nature Reserves">Nature Reserves</label><br>
+                <img src="" alt="Nature Reserves" width="150" height="250">
+            </div>
+        </div>
+
+        <label>Entertainment</label>
+        <div class="category">
+            <div class="activity-item">
+                <input type="radio" name="entertainment" value="Concerts and Shows">
+                <label for="Concerts and Shows">Concerts and Shows</label><br>
+                <img src="" alt="Concerts and Shows" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="entertainment" value="Nightlife and Dining">
+                <label for="Nightlife and Dining">Nightlife and Dining</label><br>
+                <img src="" alt="Nightlife and Dining" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="entertainment" value="Family-friendly Activities">
+                <label for="Family-friendly Activities">Family-friendly Activities</label><br>
+                <img src="" alt="Family-friendly Activities" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="entertainment" value="Sports Events">
+                <label for="Sports Events">Sports Events</label><br>
+                <img src="" alt="Sports Events" width="150" height="250">
+            </div>
+        </div>
+
+        <label>Culture</label>
+        <div class="category">
+            <div class="activity-item">
+                <input type="radio" name="culture" value="Museums and Galleries">
+                <label for="Museums and Galleries">Museums and Galleries</label><br>
+                <img src="" alt="Museums and Galleries" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="culture" value="Cultural Festivals">
+                <label for="Cultural Festivals">Cultural Festivals</label><br>
+                <img src="" alt="Cultural Festivals" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="culture" value="Theater and Performing Arts">
+                <label for="Theater and Performing Arts">Theater and Performing Arts</label><br>
+                <img src="" alt="Theater and Performing Arts" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="culture" value="Local Traditions">
+                <label for="Local Traditions">Local Traditions</label><br>
+                <img src="" alt="Local Traditions" width="150" height="250">
+            </div>
+        </div>
+
+        <label>Opportunities</label>
+        <div class="category">
+            <div class="activity-item">
+                <input type="radio" name="opportunities" value="Job Market">
+                <label for="Job Market">Job Market</label><br>
+                <img src="" alt="Job Market" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="opportunities" value="Educational Programs">
+                <label for="Educational Programs">Educational Programs</label><br>
+                <img src="" alt="Educational Programs" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="opportunities" value="Volunteer Work">
+                <label for="Volunteer Work">Volunteer Work</label><br>
+                <img src="" alt="Volunteer Work" width="150" height="250">
+            </div>
+            <div class="activity-item">
+                <input type="radio" name="opportunities" value="Networking Events">
+                <label for="Networking Events">Networking Events</label><br>
+                <img src="" alt="Networking Events" width="150" height="250">
+            </div>
+        </div>
+        <button type="button" onclick="submitSurvey()">Submit</button>
     </form>
+
+    <div id="map"></div>
+    <div id="suggestions"></div>
+
+    <script>
+        function initMap() {
+            var louisville = { lat: 38.2527, lng: -85.7585 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: louisville
+            });
+        }
+
+        function submitSurvey() {
+            var form = document.getElementById('residentSurvey');
+            var activities = form.elements['activities'].value;
+            var interests = form.elements['interests'].value;
+            var entertainment = form.elements['entertainment'].value;
+            var culture = form.elements['culture'].value;
+            var opportunities = form.elements['opportunities'].value;
+
+            var query = activities + ' ' + interests + ' ' + entertainment + ' ' + culture + ' ' + opportunities + ' in Louisville, KY';
+            var googleMapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+
+            // Display the map
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: { lat: 38.2527, lng: -85.7585 }
+            });
+
+            // Display suggestions
+            var suggestions = document.getElementById('suggestions');
+            suggestions.innerHTML = '<h2>Suggestions based on your preferences:</h2>';
+            suggestions.innerHTML += '<p>' + activities + '</p>';
+            suggestions.innerHTML += '<p>' + interests + '</p>';
+            suggestions.innerHTML += '<p>' + entertainment + '</p>';
+            suggestions.innerHTML += '<p>' + culture + '</p>';
+            suggestions.innerHTML += '<p>' + opportunities + '</p>';
+
+            // Open Google Maps in a new tab
+            window.open(googleMapsURL, '_blank');
+        }
+    </script>
 </body>
 </html>
 
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-}
-
-.category {
-    display: grid;
-    grid-template-columns: repeat(5, 3fr);
-    grid-gap: 20px;
-    padding: 20px;
-}
-
-.activity-item {
-    background-color: #ccc;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.activity-item img {
-    margin-top: 10px;
-    width: 100%;
-    height: auto;
-}
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-}
-
-</style>
