@@ -87,18 +87,7 @@
             width: 100%;
             height: auto;
         }
-
-        #map {
-            height: 400px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        #suggestions {
-            margin-top: 20px;
-        }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0nUGskBmROMHsYa2quWsVweXrBHTU_VM" async defer></script>
 </head>
 <body>
     <h1>How would you like to explore Louisville</h1>
@@ -225,18 +214,7 @@
         <button type="button" onclick="submitSurvey()">Submit</button>
     </form>
 
-    <div id="map"></div>
-    <div id="suggestions"></div>
-
     <script>
-        function initMap() {
-            var louisville = { lat: 38.2527, lng: -85.7585 };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: louisville
-            });
-        }
-
         function submitSurvey() {
             var form = document.getElementById('residentSurvey');
             var activities = form.elements['activities'].value;
@@ -245,26 +223,19 @@
             var culture = form.elements['culture'].value;
             var opportunities = form.elements['opportunities'].value;
 
-            var query = activities + ' ' + interests + ' ' + entertainment + ' ' + culture + ' ' + opportunities + ' in Louisville, KY';
-            var googleMapsURL = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+            var data = {
+                activities: activities,
+                interests: interests,
+                entertainment: entertainment,
+                culture: culture,
+                opportunities: opportunities
+            };
 
-            // Display the map
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: { lat: 38.2527, lng: -85.7585 }
-            });
+            // Store data in local storage
+            localStorage.setItem('surveyData', JSON.stringify(data));
 
-            // Display suggestions
-            var suggestions = document.getElementById('suggestions');
-            suggestions.innerHTML = '<h2>Suggestions based on your preferences:</h2>';
-            suggestions.innerHTML += '<p>' + activities + '</p>';
-            suggestions.innerHTML += '<p>' + interests + '</p>';
-            suggestions.innerHTML += '<p>' + entertainment + '</p>';
-            suggestions.innerHTML += '<p>' + culture + '</p>';
-            suggestions.innerHTML += '<p>' + opportunities + '</p>';
-
-            // Open Google Maps in a new tab
-            window.open(googleMapsURL, '_blank');
+            // Redirect to LastPage.html
+            window.location.href = 'LastPage.html';
         }
     </script>
 </body>
